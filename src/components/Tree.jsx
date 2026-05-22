@@ -4,10 +4,30 @@ import { motion } from 'framer-motion';
 const Tree = ({ progress, theme = 'spring' }) => {
   // Theme colors - Premium vibrant palettes
   const colors = {
-    spring: { leaves: ['#22c55e', '#16a34a', '#15803d', '#86efac'], flowers: '#fb7185', bark: '#3f2009' },
-    autumn: { leaves: ['#ea580c', '#c2410c', '#9a3412', '#f97316'], flowers: '#fecaca', bark: '#2d1a0a' },
-    winter: { leaves: ['#f8fafc', '#cbd5e1', '#94a3b8', '#e2e8f0'], flowers: '#ffffff', bark: '#1e293b' },
-    sakura: { leaves: ['#fbcfe8', '#f9a8d4', '#f472b6', '#ec4899'], flowers: '#ffffff', bark: '#312e81' },
+    spring: {
+      leaves: ['#22c55e', '#16a34a', '#15803d', '#86efac'],
+      flowers: '#fb7185',
+      bark: '#4a2c14',
+    },
+  
+    autumn: {
+      leaves: ['#f59e0b', '#ea580c', '#dc2626', '#b45309'],
+      flowers: '#fed7aa',
+      bark: '#3b1f0b',
+    },
+  
+    winter: {
+      leaves: ['#f1f5f9', '#e2e8f0', '#cbd5e1', '#94a3b8'],
+      flowers: '#f8fafc',
+      bark: '#1f2937',
+    },
+  
+    sakura: {
+      // more pink saturation + variation
+      leaves: ['#fecdd3', '#fda4af', '#fb7185', '#f43f5e'],
+      flowers: '#ffe4ec',
+      bark: '#4c1d95',
+    },
   };
 
   const currentTheme = colors[theme] || colors.spring;

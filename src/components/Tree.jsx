@@ -36,9 +36,9 @@ const Tree = ({ progress, theme = 'spring' }) => {
     // Top layer - Extra dense arc
     const top = [...Array(120)].map((_, i) => ({
       id: i + 150,
-      x: (Math.random() - 0.5) * 150, // Very focused top
-      y: (Math.random() * -60) - 190, // High altitude
-      size: 25 + Math.random() * 40,
+      x: (Math.random() - 0.5) * 140, // Very focused top
+      y: (Math.random() * -60) - 230, // High altitude
+      size: 25 + Math.random() * 55,
       delay: 1 + Math.random() * 1.5,
       color: currentTheme.leaves[Math.floor(Math.random() * currentTheme.leaves.length)]
     }));

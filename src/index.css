@@ -21,17 +21,16 @@
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
+  display: block;
   min-width: 320px;
   min-height: 100vh;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 #root {
   width: 100%;
-  height: 100vh;
 }
+
 
 .glass-panel {
   background: rgba(255, 255, 255, 0.4);

@@ -14,17 +14,17 @@ const Sidebar = () => {
   const progressToNextLevel = ((xp % 1000) / 1000) * 100;
 
   return (
-    <div className="h-full flex flex-col gap-6 p-6 w-full max-w-xs">
+    <div className="h-full flex flex-col gap-4 md:gap-6 p-4 md:p-6 w-full md:max-w-xs">
       {/* Profile Card */}
-      <div className="glass-panel p-6 rounded-3xl flex flex-col items-center">
+      <div className="glass-panel p-4 md:p-6 rounded-2xl md:rounded-3xl flex flex-col items-center">
         <div 
-          className="w-20 h-20 rounded-full flex items-center justify-center shadow-inner mb-4"
+          className="w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center shadow-inner mb-4"
           style={{ background: `linear-gradient(135deg, ${themeColors.primary}, ${themeColors.accent})` }}
         >
-          <Trophy className="text-white w-10 h-10" />
+          <Trophy className="text-white w-8 h-8 md:w-10 md:h-10" />
         </div>
-        <h2 className="text-xl font-bold" style={{ color: themeColors.text }}>Focus Master</h2>
-        <p className="text-sm font-medium" style={{ color: themeColors.text, opacity: 0.7 }}>Level {level}</p>
+        <h2 className="text-lg md:text-xl font-bold" style={{ color: themeColors.text }}>Focus Master</h2>
+        <p className="text-xs md:text-sm font-medium" style={{ color: themeColors.text, opacity: 0.7 }}>Level {level}</p>
         
         {/* XP Bar */}
         <div className="w-full mt-4">
@@ -45,60 +45,59 @@ const Sidebar = () => {
       </div>
 
       {/* Stats Grid */}
-      <div className="grid grid-cols-2 gap-4">
-        <div className="glass-panel p-4 rounded-2xl flex flex-col items-center justify-center text-center">
-          <Flame className="w-6 h-6 mb-1" style={{ color: themeColors.accent }} />
-          <span className="text-lg font-bold" style={{ color: themeColors.text }}>{streak}</span>
-          <span className="text-[10px] uppercase font-bold" style={{ color: themeColors.text, opacity: 0.5 }}>Day Streak</span>
+      <div className="grid grid-cols-2 gap-3 md:gap-4">
+        <div className="glass-panel p-3 md:p-4 rounded-xl md:rounded-2xl flex flex-col items-center justify-center text-center">
+          <Flame className="w-5 h-5 md:w-6 md:h-6 mb-1" style={{ color: themeColors.accent }} />
+          <span className="text-base md:text-lg font-bold" style={{ color: themeColors.text }}>{streak}</span>
+          <span className="text-[8px] md:text-[10px] uppercase font-bold" style={{ color: themeColors.text, opacity: 0.5 }}>Day Streak</span>
         </div>
-        <div className="glass-panel p-4 rounded-2xl flex flex-col items-center justify-center text-center">
-          <div className="w-6 h-6 rounded-full flex items-center justify-center mb-1" style={{ backgroundColor: `${themeColors.primary}33` }}>
-             <div className="w-3 h-3 rounded-full" style={{ backgroundColor: themeColors.primary }} />
+        <div className="glass-panel p-3 md:p-4 rounded-xl md:rounded-2xl flex flex-col items-center justify-center text-center">
+          <div className="w-5 h-5 md:w-6 md:h-6 rounded-full flex items-center justify-center mb-1" style={{ backgroundColor: `${themeColors.primary}33` }}>
+             <div className="w-2 md:w-3 h-2 md:h-3 rounded-full" style={{ backgroundColor: themeColors.primary }} />
           </div>
-          <span className="text-lg font-bold" style={{ color: themeColors.text }}>{totalTreesGrown}</span>
-          <span className="text-[10px] uppercase font-bold" style={{ color: themeColors.text, opacity: 0.5 }}>Trees Grown</span>
+          <span className="text-base md:text-lg font-bold" style={{ color: themeColors.text }}>{totalTreesGrown}</span>
+          <span className="text-[8px] md:text-[10px] uppercase font-bold" style={{ color: themeColors.text, opacity: 0.5 }}>Trees Grown</span>
         </div>
       </div>
 
       {/* Settings & Environment Controls */}
-      <div className="glass-panel p-4 rounded-3xl mt-auto space-y-4">
-        <div className="flex items-center justify-between p-2 rounded-xl transition-colors">
-          <div className="flex items-center gap-3">
-            {isNight ? <Moon size={20} className="text-indigo-400" /> : <Sun size={20} className="text-yellow-500" />}
-            <span className="text-sm font-medium" style={{ color: themeColors.text }}>Night Mode</span>
+      <div className="glass-panel p-3 md:p-4 rounded-2xl md:rounded-3xl mt-auto space-y-3 md:space-y-4">
+        <div className="flex items-center justify-between p-1.5 md:p-2 rounded-xl transition-colors">
+          <div className="flex items-center gap-2 md:gap-3">
+            {isNight ? <Moon size={18} className="text-indigo-400" /> : <Sun size={18} className="text-yellow-500" />}
+            <span className="text-xs md:text-sm font-medium" style={{ color: themeColors.text }}>Night Mode</span>
           </div>
           <button 
             onClick={() => setNight(!isNight)}
-            className={`w-10 h-6 rounded-full transition-colors relative ${isNight ? 'bg-indigo-600' : 'bg-slate-300'}`}
+            className={`w-8 h-5 md:w-10 md:h-6 rounded-full transition-colors relative ${isNight ? 'bg-indigo-600' : 'bg-slate-300'}`}
           >
             <motion.div 
-              className="absolute top-1 left-1 w-4 h-4 bg-white rounded-full"
-              animate={{ x: isNight ? 16 : 0 }}
+              className="absolute top-0.5 md:top-1 left-0.5 md:left-1 w-3 h-3 md:w-4 md:h-4 bg-white rounded-full"
+              animate={{ x: isNight ? 12 : 0 }}
             />
           </button>
         </div>
 
-        <div className="flex items-center justify-between p-2 rounded-xl transition-colors">
-          <div className="flex items-center gap-3">
-            {isMuted ? <VolumeX size={20} style={{ color: themeColors.text, opacity: 0.5 }} /> : <Volume2 size={20} style={{ color: themeColors.primary }} />}
-            <span className="text-sm font-medium" style={{ color: themeColors.text }}>Ambient Sounds</span>
+        <div className="flex items-center justify-between p-1.5 md:p-2 rounded-xl transition-colors">
+          <div className="flex items-center gap-2 md:gap-3">
+            {isMuted ? <VolumeX size={18} style={{ color: themeColors.text, opacity: 0.5 }} /> : <Volume2 size={18} style={{ color: themeColors.primary }} />}
+            <span className="text-xs md:text-sm font-medium" style={{ color: themeColors.text }}>Ambient Sounds</span>
           </div>
           <button 
             onClick={toggleMute}
-            className={`w-10 h-6 rounded-full transition-colors relative ${!isMuted ? '' : 'bg-slate-300'}`}
+            className={`w-8 h-5 md:w-10 md:h-6 rounded-full transition-colors relative ${!isMuted ? '' : 'bg-slate-300'}`}
             style={{ backgroundColor: !isMuted ? themeColors.primary : undefined }}
           >
             <motion.div 
-              className="absolute top-1 left-1 w-4 h-4 bg-white rounded-full"
-              animate={{ x: !isMuted ? 16 : 0 }}
+              className="absolute top-0.5 md:top-1 left-0.5 md:left-1 w-3 h-3 md:w-4 md:h-4 bg-white rounded-full"
+              animate={{ x: !isMuted ? 12 : 0 }}
             />
           </button>
         </div>
 
-
-        <div className="flex items-center gap-3 p-2 cursor-pointer rounded-xl transition-colors">
-          <Settings size={20} style={{ color: themeColors.text, opacity: 0.5 }} />
-          <span className="text-sm font-medium" style={{ color: themeColors.text }}>Manage Garden</span>
+        <div className="flex items-center gap-2 md:gap-3 p-1.5 md:p-2 cursor-pointer rounded-xl transition-colors">
+          <Settings size={18} style={{ color: themeColors.text, opacity: 0.5 }} />
+          <span className="text-xs md:text-sm font-medium" style={{ color: themeColors.text }}>Manage Garden</span>
         </div>
 
         <button 
@@ -109,12 +108,13 @@ const Sidebar = () => {
               audio.play().catch(e => alert("Please interact with the page first or check browser settings."));
             }
           }}
-          className="w-full py-2 text-[10px] uppercase font-bold rounded-lg border transition-colors"
+          className="w-full py-1.5 md:py-2 text-[8px] md:text-[10px] uppercase font-bold rounded-lg border transition-colors"
           style={{ color: themeColors.primary, backgroundColor: themeColors.secondary, borderColor: `${themeColors.primary}33` }}
         >
           Troubleshoot Audio
         </button>
       </div>
+
     </div>
   );
 };

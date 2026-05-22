@@ -21,24 +21,25 @@ const Tree = ({ progress, theme = 'spring' }) => {
     ];
   }, []);
 
-  // High-density leaf clusters with specific top layer
+  // Canopy clustered strictly at the top
   const leafClusters = useMemo(() => {
+    // Narrower base clusters shifted upwards
     const base = [...Array(150)].map((_, i) => ({
       id: i,
-      x: (Math.random() - 0.5) * 260,
-      y: (Math.random() - 0.5) * 220 - 100,
-      size: 30 + Math.random() * 50,
+      x: (Math.random() - 0.5) * 180, // Narrower spread
+      y: (Math.random() - 0.5) * 140 - 150, // Shifted upwards
+      size: 35 + Math.random() * 55,
       delay: Math.random() * 2,
       color: currentTheme.leaves[i % currentTheme.leaves.length]
     }));
 
-    // Top layer for the perfect arc
-    const top = [...Array(50)].map((_, i) => ({
+    // Top layer - Extra dense arc
+    const top = [...Array(120)].map((_, i) => ({
       id: i + 150,
-      x: (Math.random() - 0.5) * 200,
-      y: (Math.random() * -60) - 180, // Higher up
+      x: (Math.random() - 0.5) * 150, // Very focused top
+      y: (Math.random() * -60) - 190, // High altitude
       size: 25 + Math.random() * 40,
-      delay: 1 + Math.random(),
+      delay: 1 + Math.random() * 1.5,
       color: currentTheme.leaves[Math.floor(Math.random() * currentTheme.leaves.length)]
     }));
 

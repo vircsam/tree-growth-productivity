@@ -16,7 +16,7 @@ const Header = () => {
     >
       <div className="flex items-center gap-2 md:gap-3 pointer-events-auto">
         <div className="w-8 h-8 md:w-10 md:h-10 rounded-full overflow-hidden shadow-lg border-2" style={{ borderColor: themeColors.primary }}>
-          <img src="logo.png" alt="SeasonCycle" className="w-full h-full object-cover" />
+          <img src="season.png" alt="SeasonCycle" className="w-full h-full object-cover" />
         </div>
         <h1 className="text-xl md:text-2xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r" 
 
@@ -28,12 +28,6 @@ const Header = () => {
         </h1>
       </div>
       
-      {/* Optional: Add a subtle tag or version if needed */}
-      <div className="hidden md:block pointer-events-auto">
-        <span className="text-xs font-semibold px-3 py-1 rounded-full glass-panel" style={{ color: themeColors.text, opacity: 0.6 }}>
-          Focus & Grow
-        </span>
-      </div>
     </motion.header>
   );
 };

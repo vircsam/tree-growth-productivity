@@ -15,6 +15,12 @@ export const themes = {
       roof: 'bg-[#6a2d12]',
       chimney: 'bg-[#422006]',
       window: 'bg-sky-50',
+    },
+    ui: {
+      primary: '#16a34a', // nature-600
+      secondary: '#dcfce7', // nature-100
+      text: '#1a2e05', // dark green
+      accent: '#fbbf24', // amber-400
     }
   },
   autumn: {
@@ -33,6 +39,12 @@ export const themes = {
       roof: 'bg-[#7c2d12]',
       chimney: 'bg-[#451a03]',
       window: 'bg-orange-50',
+    },
+    ui: {
+      primary: '#ea580c', // orange-600
+      secondary: '#ffedd5', // orange-100
+      text: '#431407', // dark brown
+      accent: '#f59e0b', // amber-500
     }
   },
   winter: {
@@ -51,6 +63,12 @@ export const themes = {
       roof: 'bg-[#1e293b]',
       chimney: 'bg-[#0f172a]',
       window: 'bg-blue-50',
+    },
+    ui: {
+      primary: '#334155', // slate-700
+      secondary: '#f1f5f9', // slate-100
+      text: '#0f172a', // dark blue
+      accent: '#94a3b8', // slate-400
     }
   },
   sakura: {
@@ -69,6 +87,12 @@ export const themes = {
       roof: 'bg-[#be185d]',
       chimney: 'bg-[#831843]',
       window: 'bg-pink-50',
+    },
+    ui: {
+      primary: '#e11d48', // rose-600
+      secondary: '#ffe4e6', // rose-100
+      text: '#4c0519', // dark rose
+      accent: '#fb7185', // rose-400
     }
   }
 };
@@ -82,5 +106,11 @@ export const nightTheme = {
     roof: 'bg-[#1e1b4b]',
     chimney: 'bg-slate-900',
     window: 'bg-yellow-300 shadow-[0_0_25px_#f59e0b]',
+  },
+  ui: {
+    primary: '#6366f1', // indigo-500
+    secondary: '#1e1b4b', // indigo-950
+    text: '#e0e7ff', // indigo-100
+    accent: '#fef08a', // yellow-200
   }
 };

@@ -92,6 +92,29 @@ const Environment = () => {
         ))}
       </motion.div>
 
+      {/* Rabbits (only if progress > 40 and not night) */}
+      {progress > 40 && !isNight && [...Array(2)].map((_, i) => (
+        <motion.div
+          key={`rabbit-${i}`}
+          className="absolute w-6 h-4 bg-white rounded-full z-20"
+          initial={{ x: -50, bottom: '10%' }}
+          animate={{ 
+            x: i === 0 ? ['10%', '30%', '10%'] : ['90%', '70%', '90%'],
+            y: [0, -15, 0]
+          }}
+          transition={{ 
+            x: { repeat: Infinity, duration: 20, ease: "linear" },
+            y: { repeat: Infinity, duration: 0.6, ease: "easeOut" }
+          }}
+        >
+          {/* Ears */}
+          <div className="absolute -top-3 left-1 w-1.5 h-4 bg-white rounded-full" />
+          <div className="absolute -top-3 right-1 w-1.5 h-4 bg-white rounded-full" />
+          {/* Eye */}
+          <div className="absolute top-1 right-1 w-1 h-1 bg-black rounded-full" />
+        </motion.div>
+      ))}
+
       {/* Bench */}
       <motion.div 
         className="absolute bottom-[10%] left-[15%] w-32 h-16 z-10"
@@ -108,7 +131,7 @@ const Environment = () => {
       {/* Lanterns */}
       {[
         { left: '12%', bottom: '15%' },
-        { left: '26%', bottom: '12%' }
+        { left: '28%', bottom: '12%' }
       ].map((pos, i) => (
         <motion.div
           key={`lantern-${i}`}

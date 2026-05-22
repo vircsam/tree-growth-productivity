@@ -46,7 +46,7 @@ const Tree = ({ progress, theme = 'spring' }) => {
   }, []);
 
   return (
-    <div className="relative flex items-end justify-center w-[400px] h-[500px]">
+    <div className="relative flex items-end justify-center w-[400px] h-[600px]">
       {/* Seed Stage */}
       {progress < 5 && (
         <motion.div 
@@ -57,52 +57,52 @@ const Tree = ({ progress, theme = 'spring' }) => {
         />
       )}
 
-      {/* Main Trunk - Bigger and thicker */}
+      {/* Main Trunk - Even Taller */}
       <motion.div 
-        className="absolute bottom-0 w-10 bg-[#3f1f0a] rounded-t-full origin-bottom z-10 shadow-lg"
+        className="absolute bottom-0 w-12 bg-[#3f1f0a] rounded-t-full origin-bottom z-10 shadow-lg"
         animate={{ 
-          height: Math.min(progress * 3, 240),
-          width: 10 + (progress / 10),
-          rotate: [0, -0.5, 0, 0.5, 0]
+          height: Math.min(progress * 4.5, 350),
+          width: 12 + (progress / 8),
+          rotate: [0, -0.2, 0, 0.2, 0]
         }}
         transition={{ 
           height: { type: 'spring', stiffness: 40 },
-          rotate: { repeat: Infinity, duration: 8, ease: "easeInOut" }
+          rotate: { repeat: Infinity, duration: 10, ease: "easeInOut" }
         }}
       >
         {/* Branching Logic */}
         {progress > 30 && branches.map((branch) => (
           <motion.div
             key={branch.id}
-            className="absolute w-3 bg-[#3f1f0a] rounded-full origin-bottom shadow-md"
+            className="absolute w-4 bg-[#3f1f0a] rounded-full origin-bottom shadow-md"
             style={{ 
               bottom: `${branch.startY * 100}%`,
               left: '50%',
-              marginLeft: '-6px'
+              marginLeft: '-8px'
             }}
             initial={{ height: 0, rotate: 0 }}
             animate={{ 
-              height: Math.min((progress - 30) * branch.length / 50, branch.length),
+              height: Math.min((progress - 30) * branch.length / 40, branch.length * 1.2),
               rotate: branch.angle,
               scale: branch.scale
             }}
             transition={{ type: 'spring', stiffness: 30 }}
           >
             {/* Secondary Leaves on Branches */}
-            {progress > 50 && [...Array(4)].map((_, j) => (
+            {progress > 50 && [...Array(5)].map((_, j) => (
               <motion.div
                 key={j}
                 className="absolute rounded-full blur-[0.5px]"
                 style={{
-                  width: 30,
-                  height: 20,
+                  width: 35,
+                  height: 25,
                   backgroundColor: currentTheme.leaves[j % currentTheme.leaves.length],
-                  top: -15 - (j * 12),
-                  left: (j % 2 === 0 ? -10 : 5) + (j * 3),
+                  top: -20 - (j * 15),
+                  left: (j % 2 === 0 ? -12 : 8) + (j * 4),
                 }}
                 initial={{ scale: 0 }}
                 animate={{ scale: 1, rotate: [0, 2, -2, 0] }}
-                transition={{ delay: 0.2 + (j * 0.1), rotate: { repeat: Infinity, duration: 3 } }}
+                transition={{ delay: 0.2 + (j * 0.1), rotate: { repeat: Infinity, duration: 3.5 } }}
               />
             ))}
           </motion.div>
@@ -114,8 +114,8 @@ const Tree = ({ progress, theme = 'spring' }) => {
         <motion.div 
           className="absolute origin-bottom z-20"
           animate={{ 
-            y: -Math.min(progress * 3, 240) + 30,
-            scale: Math.min((progress - 10) / 50, 1.4)
+            y: -Math.min(progress * 4.5, 350) + 40,
+            scale: Math.min((progress - 10) / 40, 1.5)
           }}
         >
           {/* Detailed Leaf Clusters */}
@@ -124,8 +124,8 @@ const Tree = ({ progress, theme = 'spring' }) => {
               key={leaf.id}
               className="absolute rounded-full shadow-lg"
               style={{
-                width: leaf.size,
-                height: leaf.size * 0.9,
+                width: leaf.size * 1.1,
+                height: leaf.size * 1.0,
                 backgroundColor: leaf.color,
                 left: leaf.x,
                 top: leaf.y,
@@ -134,28 +134,28 @@ const Tree = ({ progress, theme = 'spring' }) => {
               initial={{ scale: 0 }}
               animate={{ 
                 scale: 1,
-                rotate: [0, 3, -3, 0],
-                x: leaf.x + (Math.sin(leaf.id) * 8)
+                rotate: [0, 2, -2, 0],
+                x: leaf.x + (Math.sin(leaf.id) * 10)
               }}
               transition={{ 
                 scale: { delay: leaf.delay },
-                rotate: { repeat: Infinity, duration: 5 + Math.random() * 3, ease: "easeInOut" }
+                rotate: { repeat: Infinity, duration: 6 + Math.random() * 4, ease: "easeInOut" }
               }}
             />
           ))}
 
           {/* Flowers */}
-          {progress > 75 && flowerPositions.map((flower) => (
+          {progress > 70 && flowerPositions.map((flower) => (
             <motion.div
               key={flower.id}
-              className="absolute w-6 h-6 z-30"
+              className="absolute w-8 h-8 z-30"
               style={{ left: flower.x, top: flower.y }}
               initial={{ scale: 0, rotate: 0 }}
               animate={{ scale: 1, rotate: 360 }}
               transition={{ delay: flower.delay, type: 'spring' }}
             >
-              <div className="absolute inset-0 bg-white/20 rounded-full blur-[2px]" />
-              <div className="absolute inset-[10%] rounded-full shadow-xl" style={{ backgroundColor: currentTheme.flowers }} />
+              <div className="absolute inset-0 bg-white/30 rounded-full blur-[3px]" />
+              <div className="absolute inset-[10%] rounded-full shadow-2xl" style={{ backgroundColor: currentTheme.flowers }} />
               <div className="absolute inset-[35%] bg-yellow-400 rounded-full" />
             </motion.div>
           ))}
@@ -163,10 +163,10 @@ const Tree = ({ progress, theme = 'spring' }) => {
       )}
 
       {/* Ground & Roots Effect */}
-      <div className="absolute bottom-[-20px] w-64 h-12 bg-[#1a0f05]/40 rounded-[50%] blur-lg z-0" />
+      <div className="absolute bottom-[-25px] w-80 h-16 bg-[#1a0f05]/40 rounded-[50%] blur-xl z-0" />
       <motion.div 
-        className="absolute bottom-0 w-40 h-3 bg-[#2d1a0a] rounded-full blur-[1px] z-0 shadow-inner"
-        animate={{ scaleX: 1 + progress/80 }}
+        className="absolute bottom-0 w-48 h-4 bg-[#2d1a0a] rounded-full blur-[1px] z-0 shadow-inner"
+        animate={{ scaleX: 1 + progress/70 }}
       />
     </div>
   );

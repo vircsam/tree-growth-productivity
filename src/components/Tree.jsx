@@ -1,36 +1,9 @@
 import React, { useMemo } from 'react';
 import { motion } from 'framer-motion';
+import { themes } from '../store/themeConfig';
 
 const Tree = ({ progress, theme = 'spring' }) => {
-  // Theme colors - Premium vibrant palettes
-  const colors = {
-    spring: {
-      leaves: ['#22c55e', '#16a34a', '#15803d', '#86efac'],
-      flowers: '#fb7185',
-      bark: '#4a2c14',
-    },
-  
-    autumn: {
-      leaves: ['#f59e0b', '#ea580c', '#dc2626', '#b45309'],
-      flowers: '#fed7aa',
-      bark: '#3b1f0b',
-    },
-  
-    winter: {
-      leaves: ['#f1f5f9', '#e2e8f0', '#cbd5e1', '#94a3b8'],
-      flowers: '#f8fafc',
-      bark: '#1f2937',
-    },
-  
-    sakura: {
-      // more pink saturation + variation
-      leaves: ['#fecdd3', '#fda4af', '#fb7185', '#f43f5e'],
-      flowers: '#ffe4ec',
-      bark: '#4c1d95',
-    },
-  };
-
-  const currentTheme = colors[theme] || colors.spring;
+  const currentTheme = themes[theme]?.tree || themes.spring.tree;
 
   // Simple, clean branch structure
   const branches = useMemo(() => {

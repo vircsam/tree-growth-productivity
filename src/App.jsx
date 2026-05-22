@@ -6,9 +6,11 @@ import Sidebar from './components/Sidebar';
 import GardenCustomizer from './components/GardenCustomizer';
 import AmbientSounds from './components/AmbientSounds';
 import { useStore } from './store/useStore';
+import { themes } from './store/themeConfig';
 
 function App() {
-  const { isNight } = useStore();
+  const { isNight, gardenTheme } = useStore();
+  const currentTheme = themes[gardenTheme] || themes.spring;
 
   return (
     <div className={`relative w-full h-screen overflow-hidden font-sans transition-colors duration-1000 ${isNight ? 'bg-[#0a0a0f]' : 'bg-[#FDFCF0]'}`}>
@@ -64,9 +66,12 @@ function App() {
         {!isNight && (
           <motion.div
             initial={{ opacity: 0 }}
-            animate={{ opacity: 0.1 }}
+            animate={{ opacity: 0.15 }}
             exit={{ opacity: 0 }}
-            className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_center,_#fbbf24_0%,_transparent_70%)]"
+            className="absolute inset-0 pointer-events-none"
+            style={{ 
+              background: `radial-gradient(circle_at_center, ${currentTheme.environment.accent} 0%, transparent 70%)` 
+            }}
           />
         )}
       </AnimatePresence>

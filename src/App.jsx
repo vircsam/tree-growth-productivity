@@ -1,0 +1,87 @@
+import React from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import Timer from './components/Timer';
+import Environment from './components/Environment';
+import Sidebar from './components/Sidebar';
+import GardenCustomizer from './components/GardenCustomizer';
+import AmbientSounds from './components/AmbientSounds';
+import { useStore } from './store/useStore';
+
+function App() {
+  const { isNight } = useStore();
+
+  return (
+    <div className={`relative w-full h-screen overflow-hidden font-sans transition-colors duration-1000 ${isNight ? 'bg-[#0a0a0f]' : 'bg-[#FDFCF0]'}`}>
+      <AmbientSounds />
+      {/* Background Environment (Always bottom layer) */}
+      <div className="absolute inset-0 z-0">
+        <Environment />
+      </div>
+
+      {/* Main UI Overlay */}
+      <div className="relative z-10 w-full h-full flex pointer-events-none">
+        
+        {/* Left Side: Stats & Controls */}
+        <motion.div 
+          initial={{ x: -100, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          className="h-full flex flex-col pointer-events-auto"
+        >
+          <Sidebar />
+        </motion.div>
+
+        {/* Center Side: Timer & Growth Focus */}
+        <div className="flex-1 h-full flex flex-col items-center justify-center p-8">
+          <motion.div
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.3 }}
+            className="pointer-events-auto"
+          >
+            <Timer />
+          </motion.div>
+        </div>
+
+        {/* Right Side: Spare for future or padding */}
+        <div className="w-64 hidden xl:block" />
+
+      </div>
+
+      {/* Bottom Toolbars */}
+      <div className="absolute bottom-4 w-full z-20 pointer-events-none">
+        <motion.div
+          initial={{ y: 50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.5 }}
+          className="pointer-events-auto"
+        >
+          <GardenCustomizer />
+        </motion.div>
+      </div>
+
+      {/* Ambient Visual Overlays */}
+      <AnimatePresence>
+        {!isNight && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.1 }}
+            exit={{ opacity: 0 }}
+            className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_center,_#fbbf24_0%,_transparent_70%)]"
+          />
+        )}
+      </AnimatePresence>
+
+      {/* Aesthetic Grain/Noise Effect */}
+      <div className="absolute inset-0 z-50 pointer-events-none opacity-[0.03] mix-blend-overlay">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <filter id="noise">
+            <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch" />
+          </filter>
+          <rect width="100%" height="100%" filter="url(#noise)" />
+        </svg>
+      </div>
+    </div>
+  );
+}
+
+export default App;

@@ -1,10 +1,14 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useStore } from '../store/useStore';
+import { themes as themeConfigs, nightTheme } from '../store/themeConfig';
 import { Palmtree, Flower2, Home, Waves, Lamp } from 'lucide-react';
 
 const GardenCustomizer = () => {
-  const { gardenTheme, setGardenTheme, activeItems, toggleItem } = useStore();
+  const { gardenTheme, setGardenTheme, activeItems, toggleItem, isNight } = useStore();
+
+  const currentTheme = isNight ? nightTheme : (themeConfigs[gardenTheme] || themeConfigs.spring);
+  const themeColors = currentTheme.ui;
 
   const themes = [
     { id: 'spring', label: 'Spring', icon: <Palmtree size={20} />, color: 'bg-emerald-100' },
@@ -37,7 +41,8 @@ const GardenCustomizer = () => {
               {gardenTheme === theme.id && (
                 <motion.div 
                   layoutId="activeTheme"
-                  className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-nature-600 rounded-full"
+                  className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full"
+                  style={{ backgroundColor: themeColors.primary }}
                 />
               )}
             </button>
@@ -54,9 +59,10 @@ const GardenCustomizer = () => {
                 onClick={() => toggleItem(item.id)}
                 className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold transition-all ${
                   activeItems.includes(item.id) 
-                    ? 'bg-nature-500 text-white' 
-                    : 'bg-cozy-sage/20 text-cozy-earth hover:bg-cozy-sage/40'
+                    ? 'text-white' 
+                    : 'bg-black/5 text-gray-500 hover:bg-black/10'
                 }`}
+                style={{ backgroundColor: activeItems.includes(item.id) ? themeColors.primary : undefined }}
               >
                 {item.icon}
                 {item.label}

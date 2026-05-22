@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Play, Pause, RotateCcw, Clock } from 'lucide-react';
 import { useStore } from '../store/useStore';
+import { themes, nightTheme } from '../store/themeConfig';
 
 const Timer = () => {
   const { 
@@ -13,8 +14,13 @@ const Timer = () => {
     pauseTimer, 
     resetTimer, 
     tick,
-    setTimer
+    setTimer,
+    gardenTheme,
+    isNight
   } = useStore();
+
+  const currentTheme = isNight ? nightTheme : (themes[gardenTheme] || themes.spring);
+  const themeColors = currentTheme.ui;
 
   const [isEditing, setIsEditing] = useState(false);
   const [editValue, setEditValue] = useState(totalTime / 60);
@@ -66,7 +72,7 @@ const Timer = () => {
             stroke="currentColor"
             strokeWidth="8"
             fill="transparent"
-            className="text-cozy-sage/30"
+            style={{ color: themeColors.secondary, opacity: 0.3 }}
           />
           <motion.circle
             cx="96"
@@ -79,7 +85,7 @@ const Timer = () => {
             initial={{ strokeDashoffset: circumference }}
             animate={{ strokeDashoffset: offset }}
             transition={{ duration: 0.5, ease: "linear" }}
-            className="text-nature-500"
+            style={{ color: themeColors.primary }}
             strokeLinecap="round"
           />
         </svg>
@@ -94,7 +100,8 @@ const Timer = () => {
               onKeyDown={handleTimeSubmit}
               onBlur={handleTimeSubmit}
               autoFocus
-              className="w-20 text-center text-4xl font-bold bg-transparent border-b-2 border-nature-500 outline-none text-cozy-dark"
+              className="w-20 text-center text-4xl font-bold bg-transparent border-b-2 outline-none"
+              style={{ color: themeColors.text, borderColor: themeColors.primary }}
             />
           ) : (
             <span 
@@ -104,7 +111,7 @@ const Timer = () => {
               {formatTime(timeLeft)}
             </span>
           )}
-          <span className="text-xs uppercase tracking-widest text-cozy-earth font-medium mt-1">
+          <span className="text-xs uppercase tracking-widest font-medium mt-1" style={{ color: themeColors.text, opacity: 0.6 }}>
             {isActive ? (isPaused ? 'Paused' : 'Focusing') : 'Ready'}
           </span>
         </div>
@@ -114,7 +121,8 @@ const Timer = () => {
       <div className="flex items-center gap-6">
         <button 
           onClick={resetTimer}
-          className="p-3 rounded-full hover:bg-cozy-peach/50 transition-colors text-cozy-earth"
+          className="p-3 rounded-full transition-colors"
+          style={{ color: themeColors.text }}
           title="Reset"
         >
           <RotateCcw size={24} />
@@ -123,7 +131,8 @@ const Timer = () => {
         {!isActive || isPaused ? (
           <button 
             onClick={startTimer}
-            className="p-5 rounded-full bg-nature-500 text-white shadow-lg hover:bg-nature-600 transition-all transform hover:scale-110 active:scale-95"
+            className="p-5 rounded-full text-white shadow-lg transition-all transform hover:scale-110 active:scale-95"
+            style={{ backgroundColor: themeColors.primary }}
             title="Start"
           >
             <Play size={32} fill="currentColor" />
@@ -131,7 +140,8 @@ const Timer = () => {
         ) : (
           <button 
             onClick={pauseTimer}
-            className="p-5 rounded-full bg-cozy-clay text-white shadow-lg hover:bg-cozy-clay/90 transition-all transform hover:scale-110 active:scale-95"
+            className="p-5 rounded-full text-white shadow-lg transition-all transform hover:scale-110 active:scale-95"
+            style={{ backgroundColor: themeColors.accent }}
             title="Pause"
           >
             <Pause size={32} fill="currentColor" />
@@ -139,7 +149,7 @@ const Timer = () => {
         )}
 
         <div className="relative group">
-          <button className="p-3 rounded-full hover:bg-cozy-peach/50 transition-colors text-cozy-earth">
+          <button className="p-3 rounded-full transition-colors" style={{ color: themeColors.text }}>
             <Clock size={24} />
           </button>
           
@@ -149,7 +159,8 @@ const Timer = () => {
               <button
                 key={mins}
                 onClick={() => setTimer(mins)}
-                className="py-1 px-2 hover:bg-nature-100 rounded text-sm font-medium text-cozy-dark text-center"
+                className="py-1 px-2 rounded text-sm font-medium transition-colors text-center"
+                style={{ color: themeColors.text }}
               >
                 {mins}m
               </button>
@@ -159,9 +170,10 @@ const Timer = () => {
       </div>
 
       {/* Session Progress Bar */}
-      <div className="w-full h-1.5 bg-cozy-sage/20 rounded-full overflow-hidden">
+      <div className="w-full h-1.5 rounded-full overflow-hidden" style={{ backgroundColor: themeColors.secondary, opacity: 0.3 }}>
         <motion.div 
-          className="h-full bg-nature-400"
+          className="h-full"
+          style={{ backgroundColor: themeColors.primary }}
           initial={{ width: 0 }}
           animate={{ width: `${percentage}%` }}
         />

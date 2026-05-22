@@ -27,10 +27,8 @@ export const useStore = create(
       // Settings
       soundVolume: 0.5,
       isMuted: false,
-      audioMode: 'ambient', // ambient, lofi
 
       // Actions
-      setAudioMode: (mode) => set({ audioMode: mode }),
       setTimer: (minutes) => set({ 
         totalTime: minutes * 60, 
         timeLeft: minutes * 60, 
